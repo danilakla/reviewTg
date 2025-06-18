@@ -56,9 +56,11 @@ public class ReminderService {
         return reminderRepository.save(reminder);
     }
 
+
     @Scheduled(fixedRate = 60000) // Check every minute
     public void checkAndSendReminders() {
         LocalDateTime now = LocalDateTime.now();
+        System.out.println(now.toString());
         List<Reminder> dueReminders = reminderRepository.findActiveRemindersForTime(now);
 
         for (Reminder reminder : dueReminders) {
